@@ -1,20 +1,145 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Page Layout</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap"
+      rel="stylesheet"
     />
-    <title>Hello from Electron renderer!</title>
-</head>
-<body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
+    <link rel="stylesheet" href="styles.css" />
+    <script></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <ul>
+          <li onclick="toggleHome()">
+            <i class="fas fa-home text-xl"></i>
+            <span>Home</span>
+          </li>
+          <li onclick="toggleTemp()">
+            <i
+              class="fas fa-thermometer-half text-xl"
+              style="margin-right: 24px"
+            ></i>
+            <span>Temp</span>
+          </li>
+          <li onclick="toggleAQI()">
+            <i class="fas fa-wind text-xl"></i>
+            <span>AQI</span>
+          </li>
+          <li onclick="toggleTime()">
+            <i class="fas fa-clock text-xl"></i>
+            <span>Time</span>
+          </li>
+          <li onclick="toggleSettings()">
+            <i class="fas fa-cog text-xl"></i>
+            <span>Settings</span>
+            <i class="fas fa-chevron-down text-sm"></i>
+          </li>
+
+          <ul id="settings-menu" class="settings-menu">
+            <input type="checkbox" class="checkbox" id="checkbox" />
+            <label for="checkbox" class="checkbox-label">
+              <i class="fas fa-moon"></i>
+              <i class="fas fa-sun"></i>
+              <span class="ball"></span>
+            </label>
+            <li onclick="toggleLocation()">
+              <i class="fas fa-map-marker-alt text-xl"></i>
+              <span>Location</span>
+            </li>
+          </ul>
+        </ul>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="weather-card" id="home">
+          <div class="weather" id="weather">
+            <img
+              class="weather-icon"
+              src="https://static.vecteezy.com/system/resources/previews/024/825/182/non_2x/3d-weather-icon-day-with-rain-free-png.png"
+              alt="..."
+            />
+            <h1 class="temp" id="temperature">15°C</h1>
+            <h2 class="city">New York</h2>
+            <div class="details">
+              <div style="display: flex" class="col">
+                <img
+                  class="humi"
+                  src="https://cdn-icons-png.flaticon.com/512/136/136712.png"
+                />
+                <div class="info">
+                  <p class="humidity" id="aqi"></p>
+                  <p>AQI</p>
+                </div>
+              </div>
+              <div class="col">
+                <img src="icons/clock.png" />
+                <div class="info">
+                  <p class="wind"><span id="time"></span></p>
+                  <p>CLOCK</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="weather-card" id="temp">
+         
+          <div class="weather" id="weather">
+            <img
+              class="weather-icon"
+              src="https://static.vecteezy.com/system/resources/previews/024/825/182/non_2x/3d-weather-icon-day-with-rain-free-png.png"
+              alt="..."
+            />
+            <h1 class="temp" id="temperatureOnly">15°C</h1>
+            <h2 class="city">Temprature</h2>
+          </div>
+        </div>
+        <div class="weather-card" id="aqi2">
+          <div class="weather" id="weather">
+            <img
+              class="weather-icon"
+              src="https://cdn-icons-png.flaticon.com/512/136/136712.png"
+              alt="..."
+            />
+            <h1 id="aqiOnly">455 (very bad)</h1>
+            <h2 class="city">AQI</h2>
+          </div>
+        </div>
+        <div class="weather-card" id="TimeClock">
+          <div class="weather" id="weather">
+            <img class="weather-icon" src="icons/clock.png" alt="..." />
+            <h1 id="timeOnly" style = "margin-top: -10px;"></h1>
+            <h2 class="city">Clock</h2>
+          </div>
+        </div>
+        <div class="weather-card" id="location">
+          <div class="weather" id="weather"></div>
+          <div
+            class="search"
+            id="search"
+            style="display: flex; height: 50%; width: 98%; margin: 10px"
+          >
+            <input
+              type="search"
+              placeholder="enter city name"
+              spellcheck="false"
+            />
+            <button>
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
+  <script src="renderer.js"></script>
+  <script src="weatherApi.js"></script>
 </html>
